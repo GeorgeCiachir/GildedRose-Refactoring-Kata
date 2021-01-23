@@ -7,6 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class DexterityVestTest extends SellInTest {
 
     private static final int DEGRADE_TWICE = 2;
+    private static final int MIN_QUALITY = 0;
 
     @Test
     public void qualityDegradesWithNormalStepGivenSellInNotPassed() {
@@ -67,6 +68,6 @@ public class DexterityVestTest extends SellInTest {
         }
 
         //then
-        assertThat(actual.quality).isEqualTo(0);
+        assertThat(actual.quality).isEqualTo(MIN_QUALITY);
     }
 }
