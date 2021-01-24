@@ -13,9 +13,9 @@ public enum ProductType {
     CONJURED("Conjured Mana Cake", ConjuredMana::new);
 
     private final String itemName;
-    private final Function<Item, ? extends Product> productConstructor;
+    private final Function<Item, Product> productConstructor;
 
-    ProductType(String itemName, Function<Item, ? extends Product> productConstructor) {
+    ProductType(String itemName, Function<Item, Product> productConstructor) {
         this.itemName = itemName;
         this.productConstructor = productConstructor;
     }
@@ -24,7 +24,7 @@ public enum ProductType {
         return itemName;
     }
 
-    public Function<Item, ? extends Product> getProductConstructor() {
+    public Function<Item, Product> getProductConstructor() {
         return productConstructor;
     }
 }
