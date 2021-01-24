@@ -24,12 +24,12 @@ public class NormalProduct implements Product {
             return;
         }
 
-        if (item.sellIn > 0) {
+        if (withinSellInPeriod()) {
             degradeNormal();
             return;
         }
 
-        if (item.quality >= 2) {
+        if (canDegradeTwice()) {
             degradeTwice();
         } else {
             degradeNormal();
@@ -40,12 +40,20 @@ public class NormalProduct implements Product {
         return item.quality <= 0;
     }
 
+    private boolean withinSellInPeriod() {
+        return item.sellIn > 0;
+    }
+
     private void degradeNormal() {
         item.quality--;
     }
 
     private void degradeTwice() {
         item.quality = item.quality - DOUBLE_DEGRADATION;
+    }
+
+    private boolean canDegradeTwice() {
+        return item.quality >= 2;
     }
 
     private void updateSellIn() {
