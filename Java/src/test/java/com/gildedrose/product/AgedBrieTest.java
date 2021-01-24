@@ -1,5 +1,7 @@
-package com.gildedrose;
+package com.gildedrose.product;
 
+import com.gildedrose.BaseTest;
+import com.gildedrose.Item;
 import com.gildedrose.product.AgedBrie;
 import com.gildedrose.product.Product;
 import org.junit.jupiter.api.Test;
