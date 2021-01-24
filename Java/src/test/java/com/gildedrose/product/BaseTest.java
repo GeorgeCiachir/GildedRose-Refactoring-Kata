@@ -1,5 +1,6 @@
-package com.gildedrose;
+package com.gildedrose.product;
 
+import com.gildedrose.Item;
 import com.gildedrose.product.NormalProduct;
 import com.gildedrose.product.Product;
 import org.junit.jupiter.api.Test;
@@ -15,12 +16,11 @@ public class BaseTest {
         //given
         int initialSellIn = 10;
         Item actual = new Item("+5 Dexterity Vest", initialSellIn, 20);
-        Item[] items = new Item[]{actual};
+        Product product = Product.builder(NormalProduct::new).forItem(actual);
 
         //when
-        GildedRose app = new GildedRose(items);
         for (int i = 0; i < DAYS_TO_PASS; i++) {
-            app.updateQuality();
+            product.update();
         }
 
         //then

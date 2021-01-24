@@ -1,9 +1,6 @@
 package com.gildedrose.product;
 
-import com.gildedrose.BaseTest;
 import com.gildedrose.Item;
-import com.gildedrose.product.Product;
-import com.gildedrose.product.Sulfuras;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
