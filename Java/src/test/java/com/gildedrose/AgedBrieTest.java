@@ -1,5 +1,7 @@
 package com.gildedrose;
 
+import com.gildedrose.product.AgedBrie;
+import com.gildedrose.product.Product;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -15,15 +17,14 @@ public class AgedBrieTest extends BaseTest {
         int initialSellInDays = 10;
         int initialQuality = 20;
         Item actual = new Item("Aged Brie", initialSellInDays, initialQuality);
-        Item[] items = new Item[]{actual};
+        Product product = Product.builder(AgedBrie::new).forItem(actual);
 
         //when
         int daysPassed = initialSellInDays;
         // don't overshoot initialSellInDays -> quality increases twice as fast
         assertThat(daysPassed).isLessThanOrEqualTo(initialSellInDays);
-        GildedRose app = new GildedRose(items);
         for (int i = 0; i < daysPassed; i++) {
-            app.updateQuality();
+            product.update();
         }
 
         //then
@@ -36,16 +37,15 @@ public class AgedBrieTest extends BaseTest {
         int initialSellInDays = 10;
         int initialQuality = 20;
         Item actual = new Item("Aged Brie", initialSellInDays, initialQuality);
-        Item[] items = new Item[]{actual};
+        Product product = Product.builder(AgedBrie::new).forItem(actual);
 
         //when
         int daysWithDoubleQualityIncrease = 9;
         int daysPassed = initialSellInDays + daysWithDoubleQualityIncrease;
         // don't overshoot MAX_QUALITY
         assertThat(daysWithDoubleQualityIncrease).isLessThanOrEqualTo((MAX_QUALITY - initialSellInDays - initialQuality) / TWICE_THE_QUALITY);
-        GildedRose app = new GildedRose(items);
         for (int i = 0; i < daysPassed; i++) {
-            app.updateQuality();
+            product.update();
         }
 
         //then
@@ -58,14 +58,13 @@ public class AgedBrieTest extends BaseTest {
         int initialSellInDays = 10;
         int initialQuality = 20;
         Item actual = new Item("Aged Brie", initialSellInDays, initialQuality);
-        Item[] items = new Item[]{actual};
+        Product product = Product.builder(AgedBrie::new).forItem(actual);
 
         //when
         int daysWithDoubleQualityIncrease = 10;
         int daysPassed = initialSellInDays + daysWithDoubleQualityIncrease + 2;
-        GildedRose app = new GildedRose(items);
         for (int i = 0; i < daysPassed; i++) {
-            app.updateQuality();
+            product.update();
         }
 
         //then
