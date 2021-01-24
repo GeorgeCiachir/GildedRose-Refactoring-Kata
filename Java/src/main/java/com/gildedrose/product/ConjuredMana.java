@@ -2,11 +2,11 @@ package com.gildedrose.product;
 
 import com.gildedrose.Item;
 
-public class Conjured implements Product {
+public class ConjuredMana implements Product {
 
     private final Item item;
 
-    public Conjured(Item item) {
+    public ConjuredMana(Item item) {
         this.item = item;
     }
 

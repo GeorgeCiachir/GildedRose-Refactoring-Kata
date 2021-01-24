@@ -10,7 +10,7 @@ public enum ProductType {
     AGED_BRIE("Aged Brie", AgedBrie::new),
     SULFURAS("Sulfuras, Hand of Ragnaros", Sulfuras::new),
     BACKSTAGE_PASSES("Backstage passes to a TAFKAL80ETC concert", BackstagePasses::new),
-    CONJURED("Conjured Mana Cake", Conjured::new);
+    CONJURED("Conjured Mana Cake", ConjuredMana::new);
 
     private final String itemName;
     private final Function<Item, ? extends Product> productConstructor;
