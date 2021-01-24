@@ -1,7 +1,7 @@
 package com.gildedrose.product;
 
-import com.gildedrose.Item;
 import com.gildedrose.BaseTest;
+import com.gildedrose.Item;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -11,19 +11,17 @@ class NormalProductTest extends BaseTest {
     private static final int DEGRADE_TWICE = 2;
     private static final int MIN_QUALITY = 0;
 
-    private Item elixir;
-    private Item dexterityVest;
-    private Item anotherNormal;
-    private Product elixirProduct;
-    private Product dexterityVestProduct;
-    private Product anotherNormalProduct;
-
     @Test
     public void degradesNormalStepBeforeSellIn() {
         //given
         int initialSellInDays = 10;
         int initialQuality = 20;
-        setup(initialSellInDays, initialQuality);
+        Item elixir = new Item("Elixir of the Mongoose", initialSellInDays, initialQuality);
+        Item dexterityVest = new Item("+5 Dexterity Vest", initialSellInDays, initialQuality);
+        Item anotherNormal = new Item("a normal item", initialSellInDays, initialQuality);
+        Product elixirProduct = Product.builder(NormalProduct::new).forItem(elixir);
+        Product dexterityVestProduct = Product.builder(NormalProduct::new).forItem(dexterityVest);
+        Product anotherNormalProduct = Product.builder(NormalProduct::new).forItem(anotherNormal);
 
         //when
         int daysPassed = 9;
@@ -44,7 +42,12 @@ class NormalProductTest extends BaseTest {
         //given
         int initialSellInDays = 10;
         int initialQuality = 4;
-        setup(initialSellInDays, initialQuality);
+        Item elixir = new Item("Elixir of the Mongoose", initialSellInDays, initialQuality);
+        Item dexterityVest = new Item("+5 Dexterity Vest", initialSellInDays, initialQuality);
+        Item anotherNormal = new Item("a normal item", initialSellInDays, initialQuality);
+        Product elixirProduct = Product.builder(NormalProduct::new).forItem(elixir);
+        Product dexterityVestProduct = Product.builder(NormalProduct::new).forItem(dexterityVest);
+        Product anotherNormalProduct = Product.builder(NormalProduct::new).forItem(anotherNormal);
 
         //when
         int daysPassed = 9;
@@ -65,7 +68,12 @@ class NormalProductTest extends BaseTest {
         //given
         int initialSellInDays = 10;
         int initialQuality = 20;
-        setup(initialSellInDays, initialQuality);
+        Item elixir = new Item("Elixir of the Mongoose", initialSellInDays, initialQuality);
+        Item dexterityVest = new Item("+5 Dexterity Vest", initialSellInDays, initialQuality);
+        Item anotherNormal = new Item("a normal item", initialSellInDays, initialQuality);
+        Product elixirProduct = Product.builder(NormalProduct::new).forItem(elixir);
+        Product dexterityVestProduct = Product.builder(NormalProduct::new).forItem(dexterityVest);
+        Product anotherNormalProduct = Product.builder(NormalProduct::new).forItem(anotherNormal);
 
         //when
         int daysAfterSellInPassed = 4;
@@ -89,7 +97,12 @@ class NormalProductTest extends BaseTest {
         //given
         int initialSellInDays = 10;
         int initialQuality = 21;
-        setup(initialSellInDays, initialQuality);
+        Item elixir = new Item("Elixir of the Mongoose", initialSellInDays, initialQuality);
+        Item dexterityVest = new Item("+5 Dexterity Vest", initialSellInDays, initialQuality);
+        Item anotherNormal = new Item("a normal item", initialSellInDays, initialQuality);
+        Product elixirProduct = Product.builder(NormalProduct::new).forItem(elixir);
+        Product dexterityVestProduct = Product.builder(NormalProduct::new).forItem(dexterityVest);
+        Product anotherNormalProduct = Product.builder(NormalProduct::new).forItem(anotherNormal);
 
         //when
         int daysAfterSellInPassed = 6;
@@ -113,7 +126,12 @@ class NormalProductTest extends BaseTest {
         //given
         int initialSellInDays = 10;
         int initialQuality = 20;
-        setup(initialSellInDays, initialQuality);
+        Item elixir = new Item("Elixir of the Mongoose", initialSellInDays, initialQuality);
+        Item dexterityVest = new Item("+5 Dexterity Vest", initialSellInDays, initialQuality);
+        Item anotherNormal = new Item("a normal item", initialSellInDays, initialQuality);
+        Product elixirProduct = Product.builder(NormalProduct::new).forItem(elixir);
+        Product dexterityVestProduct = Product.builder(NormalProduct::new).forItem(dexterityVest);
+        Product anotherNormalProduct = Product.builder(NormalProduct::new).forItem(anotherNormal);
 
         //when
         int daysToPassAfterSellToReachZeroQuality = (initialQuality - initialSellInDays) / DEGRADE_TWICE;
@@ -128,14 +146,5 @@ class NormalProductTest extends BaseTest {
         assertThat(elixir.quality).isEqualTo(MIN_QUALITY);
         assertThat(dexterityVest.quality).isEqualTo(MIN_QUALITY);
         assertThat(anotherNormal.quality).isEqualTo(MIN_QUALITY);
-    }
-
-    private void setup(int initialSellInDays, int initialQuality) {
-        elixir = new Item("Elixir of the Mongoose", initialSellInDays, initialQuality);
-        dexterityVest = new Item("+5 Dexterity Vest", initialSellInDays, initialQuality);
-        anotherNormal = new Item("a normal item", initialSellInDays, initialQuality);
-        elixirProduct = Product.builder(NormalProduct::new).forItem(elixir);
-        dexterityVestProduct = Product.builder(NormalProduct::new).forItem(dexterityVest);
-        anotherNormalProduct = Product.builder(NormalProduct::new).forItem(anotherNormal);
     }
 }
