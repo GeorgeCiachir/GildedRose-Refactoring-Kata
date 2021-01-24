@@ -1,12 +1,12 @@
 package com.gildedrose.product;
 
 import com.gildedrose.Item;
-import com.gildedrose.SellInTest;
+import com.gildedrose.BaseTest;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class NormalProductTest extends SellInTest {
+class NormalProductTest extends BaseTest {
 
     private static final int DEGRADE_TWICE = 2;
     private static final int MIN_QUALITY = 0;

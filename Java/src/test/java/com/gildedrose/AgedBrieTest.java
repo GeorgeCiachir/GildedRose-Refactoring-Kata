@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class AgedBrieTest extends SellInTest {
+public class AgedBrieTest extends BaseTest {
 
     private static final int MAX_QUALITY = 50;
     private static final int TWICE_THE_QUALITY = 2;

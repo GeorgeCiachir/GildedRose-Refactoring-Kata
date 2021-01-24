@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class BackstagePassesTest extends SellInTest {
+public class BackstagePassesTest extends BaseTest {
 
     private static final int MIN_QUALITY = 0;
     private static final int MAX_QUALITY = 50;

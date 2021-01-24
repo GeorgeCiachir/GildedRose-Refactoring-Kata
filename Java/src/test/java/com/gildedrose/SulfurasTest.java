@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class SulfurasTest extends SellInTest {
+public class SulfurasTest extends BaseTest {
 
     @Test
     public void qualityRemainsFixed() {
