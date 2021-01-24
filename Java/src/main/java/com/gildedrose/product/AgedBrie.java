@@ -12,6 +12,20 @@ public class AgedBrie implements Product {
 
     @Override
     public void update() {
+        updateQuality();
+        updateSellIn();
+    }
 
+    private void updateQuality() {
+
+    }
+
+    private void updateSellIn() {
+        item.sellIn--;
+    }
+
+    @Override
+    public String toString() {
+        return item.toString();
     }
 }
