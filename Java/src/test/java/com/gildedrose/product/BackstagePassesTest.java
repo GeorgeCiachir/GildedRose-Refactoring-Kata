@@ -1,5 +1,7 @@
-package com.gildedrose;
+package com.gildedrose.product;
 
+import com.gildedrose.BaseTest;
+import com.gildedrose.Item;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -17,15 +19,14 @@ public class BackstagePassesTest extends BaseTest {
         int initialSellInDays = 40;
         int initialQuality = 2;
         Item actual = new Item("Backstage passes to a TAFKAL80ETC concert", initialSellInDays, initialQuality);
-        Item[] items = new Item[]{actual};
+        Product product = Product.builder(BackstagePasses::new).forItem(actual);
 
         //when
         int daysPassed = 29;
         //don't overshoot the 10 days before sellIn
         assertThat(daysPassed).isLessThanOrEqualTo(initialSellInDays - 10);
-        GildedRose app = new GildedRose(items);
         for (int i = 0; i < daysPassed; i++) {
-            app.updateQuality();
+            product.update();
         }
 
         //then
@@ -39,16 +40,15 @@ public class BackstagePassesTest extends BaseTest {
         int initialSellInDays = 40;
         int initialQuality = 2;
         Item actual = new Item("Backstage passes to a TAFKAL80ETC concert", initialSellInDays, initialQuality);
-        Item[] items = new Item[]{actual};
+        Product product = Product.builder(BackstagePasses::new).forItem(actual);
 
         //when
         int daysPassed = 31;
         //between 10 to 5 days before sellIn
         assertThat(daysPassed).isLessThanOrEqualTo(initialSellInDays - 5);
         assertThat(daysPassed).isGreaterThan(initialSellInDays - 10);
-        GildedRose app = new GildedRose(items);
         for (int i = 0; i < daysPassed; i++) {
-            app.updateQuality();
+            product.update();
         }
 
         //then
@@ -63,15 +63,14 @@ public class BackstagePassesTest extends BaseTest {
         int initialSellInDays = 40;
         int initialQuality = 2;
         Item actual = new Item("Backstage passes to a TAFKAL80ETC concert", initialSellInDays, initialQuality);
-        Item[] items = new Item[]{actual};
+        Product product = Product.builder(BackstagePasses::new).forItem(actual);
 
         //when
         int daysPassed = 37;
         //after 5 days before sellIn
         assertThat(daysPassed).isGreaterThan(initialSellInDays - 5);
-        GildedRose app = new GildedRose(items);
         for (int i = 0; i < daysPassed; i++) {
-            app.updateQuality();
+            product.update();
         }
 
         //then
@@ -88,15 +87,14 @@ public class BackstagePassesTest extends BaseTest {
         int initialSellInDays = 40;
         int initialQuality = 2;
         Item actual = new Item("Backstage passes to a TAFKAL80ETC concert", initialSellInDays, initialQuality);
-        Item[] items = new Item[]{actual};
+        Product product = Product.builder(BackstagePasses::new).forItem(actual);
 
         //when
         int daysPassed = 39;
         //after 5 days before sellIn
         assertThat(daysPassed).isGreaterThan(initialSellInDays - 5);
-        GildedRose app = new GildedRose(items);
         for (int i = 0; i < daysPassed; i++) {
-            app.updateQuality();
+            product.update();
         }
 
         //then
@@ -109,15 +107,14 @@ public class BackstagePassesTest extends BaseTest {
         int initialSellInDays = 40;
         int initialQuality = 2;
         Item actual = new Item("Backstage passes to a TAFKAL80ETC concert", initialSellInDays, initialQuality);
-        Item[] items = new Item[]{actual};
+        Product product = Product.builder(BackstagePasses::new).forItem(actual);
 
         //when
         int daysPassed = 41;
         //after 5 days before sellIn
         assertThat(daysPassed).isGreaterThan(initialSellInDays - 5);
-        GildedRose app = new GildedRose(items);
         for (int i = 0; i < daysPassed; i++) {
-            app.updateQuality();
+            product.update();
         }
 
         //then
