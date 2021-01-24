@@ -13,7 +13,7 @@ public class TextTests {
 
     private static final String EVOLUTION_TXT = "evolution.txt";
     private static final String BENCHMARK_TXT = "benchmark.txt";
-    private static final int DAYS = 45;
+    private static final int DAYS = 60;
 
     @Test
     public void testEvolution() {
