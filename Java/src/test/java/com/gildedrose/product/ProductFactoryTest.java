@@ -18,13 +18,13 @@ class ProductFactoryTest {
         Item backstagePasses = new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20);
         Item conjuredMana = new Item("Conjured Mana Cake", 3, 6);
 
-        assertThat(ProductFactory.productFor(dexterityVest)).isInstanceOf(NormalProduct.class);
-        assertThat(ProductFactory.productFor(elixir)).isInstanceOf(NormalProduct.class);
-        assertThat(ProductFactory.productFor(someNewNormalItem)).isInstanceOf(NormalProduct.class);
+        assertThat(ProductFactory.newProduct(dexterityVest)).isInstanceOf(NormalProduct.class);
+        assertThat(ProductFactory.newProduct(elixir)).isInstanceOf(NormalProduct.class);
+        assertThat(ProductFactory.newProduct(someNewNormalItem)).isInstanceOf(NormalProduct.class);
 
-        assertThat(ProductFactory.productFor(agedBrie)).isInstanceOf(AgedBrie.class);
-        assertThat(ProductFactory.productFor(sulfuras)).isInstanceOf(Sulfuras.class);
-        assertThat(ProductFactory.productFor(backstagePasses)).isInstanceOf(BackstagePasses.class);
-        assertThat(ProductFactory.productFor(conjuredMana)).isInstanceOf(ConjuredMana.class);
+        assertThat(ProductFactory.newProduct(agedBrie)).isInstanceOf(AgedBrie.class);
+        assertThat(ProductFactory.newProduct(sulfuras)).isInstanceOf(Sulfuras.class);
+        assertThat(ProductFactory.newProduct(backstagePasses)).isInstanceOf(BackstagePasses.class);
+        assertThat(ProductFactory.newProduct(conjuredMana)).isInstanceOf(ConjuredMana.class);
     }
 }

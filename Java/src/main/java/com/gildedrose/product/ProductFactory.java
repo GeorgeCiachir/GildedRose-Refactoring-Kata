@@ -17,7 +17,7 @@ public class ProductFactory {
                 .collect(toMap(ProductType::getItemName, ProductType::getProductConstructor));
     }
 
-    public static Product productFor(Item item) {
+    public static Product newProduct(Item item) {
         Function<Item, Product> productConstructor =
                 CONSTRUCTORS.getOrDefault(item.name, defaultProductConstructor());
 

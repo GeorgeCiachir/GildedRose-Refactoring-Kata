@@ -5,7 +5,8 @@ import com.gildedrose.product.ProductFactory;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 class GildedRose {
 
@@ -15,8 +16,8 @@ class GildedRose {
     public GildedRose(Item[] items) {
         this.items = items;
         products = Arrays.stream(items)
-                .map(ProductFactory::productFor)
-                .collect(Collectors.toList());
+                .map(ProductFactory::newProduct)
+                .collect(toList());
     }
 
     public void updateQuality() {
