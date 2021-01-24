@@ -1,5 +1,7 @@
 package com.gildedrose;
 
+import com.gildedrose.product.NormalProduct;
+import com.gildedrose.product.Product;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -15,13 +17,12 @@ public class DexterityVestTest extends SellInTest {
         int initialSellInDays = 10;
         int initialQuality = 20;
         Item actual = new Item("+5 Dexterity Vest", initialSellInDays, initialQuality);
-        Item[] items = new Item[]{actual};
+        Product normalProduct = Product.builder(NormalProduct::new).forItem(actual);
 
         //when
         int daysPassed = 9;
-        GildedRose app = new GildedRose(items);
         for (int i = 0; i < daysPassed; i++) {
-            app.updateQuality();
+            normalProduct.update();
         }
 
         //then
@@ -34,13 +35,12 @@ public class DexterityVestTest extends SellInTest {
         int initialSellInDays = 10;
         int initialQuality = 4;
         Item actual = new Item("+5 Dexterity Vest", initialSellInDays, initialQuality);
-        Item[] items = new Item[]{actual};
+        Product normalProduct = Product.builder(NormalProduct::new).forItem(actual);
 
         //when
         int daysPassed = 9;
-        GildedRose app = new GildedRose(items);
         for (int i = 0; i < daysPassed; i++) {
-            app.updateQuality();
+            normalProduct.update();
         }
 
         //then
@@ -53,16 +53,15 @@ public class DexterityVestTest extends SellInTest {
         int initialSellInDays = 10;
         int initialQuality = 20;
         Item actual = new Item("+5 Dexterity Vest", initialSellInDays, initialQuality);
-        Item[] items = new Item[]{actual};
+        Product normalProduct = Product.builder(NormalProduct::new).forItem(actual);
 
         //when
         int daysAfterSellInPassed = 4;
         // don't overshoot this, so the quality won't go to zero
         assertThat(daysAfterSellInPassed).isLessThanOrEqualTo((initialQuality - initialSellInDays) / DEGRADE_TWICE - 1);
         int totalDaysPassed = initialSellInDays + daysAfterSellInPassed;
-        GildedRose app = new GildedRose(items);
         for (int i = 0; i < totalDaysPassed; i++) {
-            app.updateQuality();
+            normalProduct.update();
         }
 
         //then
@@ -75,16 +74,15 @@ public class DexterityVestTest extends SellInTest {
         int initialSellInDays = 10;
         int initialQuality = 21;
         Item actual = new Item("+5 Dexterity Vest", initialSellInDays, initialQuality);
-        Item[] items = new Item[]{actual};
+        Product normalProduct = Product.builder(NormalProduct::new).forItem(actual);
 
         //when
         int daysAfterSellInPassed = 6;
         // don't overshoot this, so the quality won't go to zero
         assertThat(daysAfterSellInPassed).isGreaterThanOrEqualTo((initialQuality - initialSellInDays) / DEGRADE_TWICE + 1);
         int totalDaysPassed = initialSellInDays + daysAfterSellInPassed;
-        GildedRose app = new GildedRose(items);
         for (int i = 0; i < totalDaysPassed; i++) {
-            app.updateQuality();
+            normalProduct.update();
         }
 
         //then
@@ -98,14 +96,13 @@ public class DexterityVestTest extends SellInTest {
         int initialSellInDays = 10;
         int initialQuality = 20;
         Item actual = new Item("+5 Dexterity Vest", initialSellInDays, initialQuality);
-        Item[] items = new Item[]{actual};
+        Product normalProduct = Product.builder(NormalProduct::new).forItem(actual);
 
         //when
         int daysToPassAfterSellToReachZeroQuality = (initialQuality - initialSellInDays) / DEGRADE_TWICE;
         int totalDaysPassed = initialSellInDays + daysToPassAfterSellToReachZeroQuality + 1;
-        GildedRose app = new GildedRose(items);
         for (int i = 0; i < totalDaysPassed; i++) {
-            app.updateQuality();
+            normalProduct.update();
         }
 
         //then
