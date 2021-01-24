@@ -37,7 +37,7 @@ public class NormalProduct implements Product {
     }
 
     private boolean expired() {
-        return item.quality <= 0;
+        return item.quality == 0;
     }
 
     private boolean withinSellInPeriod() {
