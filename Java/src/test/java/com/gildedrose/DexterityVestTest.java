@@ -10,7 +10,7 @@ public class DexterityVestTest extends SellInTest {
     private static final int MIN_QUALITY = 0;
 
     @Test
-    public void qualityDegradesWithNormalStepGivenSellInNotPassed() {
+    public void degradesNormalStepBeforeSellIn() {
         //given
         int initialSellInDays = 10;
         int initialQuality = 20;
@@ -29,7 +29,7 @@ public class DexterityVestTest extends SellInTest {
     }
 
     @Test
-    public void qualityDegradesTwiceAsFastGivenSellInPassed() {
+    public void degradesTwiceAsFastAfterSellInInitialEvenQuality() {
         //given
         int initialSellInDays = 10;
         int initialQuality = 20;
@@ -47,8 +47,30 @@ public class DexterityVestTest extends SellInTest {
         }
 
         //then
-        System.out.println(actual.quality);
         assertThat(actual.quality).isEqualTo(initialQuality - initialSellInDays - DEGRADE_TWICE * daysAfterSellInPassed);
+    }
+
+    @Test
+    public void degradesTwiceAsFastAfterSellInInitialOddQualityNotBelowZero() {
+        //given
+        int initialSellInDays = 10;
+        int initialQuality = 21;
+        Item actual = new Item("+5 Dexterity Vest", initialSellInDays, initialQuality);
+        Item[] items = new Item[]{actual};
+
+        //when
+        int daysAfterSellInPassed = 6;
+        // don't overshoot this, so the quality won't go to zero
+        assertThat(daysAfterSellInPassed).isGreaterThanOrEqualTo((initialQuality - initialSellInDays) / DEGRADE_TWICE + 1);
+        int totalDaysPassed = initialSellInDays + daysAfterSellInPassed;
+        GildedRose app = new GildedRose(items);
+        for (int i = 0; i < totalDaysPassed; i++) {
+            app.updateQuality();
+        }
+
+        //then
+        System.out.println(actual.quality);
+        assertThat(actual.quality).isEqualTo(MIN_QUALITY);
     }
 
     @Test
