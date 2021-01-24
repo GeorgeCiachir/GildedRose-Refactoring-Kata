@@ -29,6 +29,25 @@ public class ElixirTest extends SellInTest {
     }
 
     @Test
+    public void degradesNormalStepBeforeSellInNeverBelowZero() {
+        //given
+        int initialSellInDays = 10;
+        int initialQuality = 4;
+        Item actual = new Item("Elixir of the Mongoose", initialSellInDays, initialQuality);
+        Item[] items = new Item[]{actual};
+
+        //when
+        int daysPassed = 9;
+        GildedRose app = new GildedRose(items);
+        for (int i = 0; i < daysPassed; i++) {
+            app.updateQuality();
+        }
+
+        //then
+        assertThat(actual.quality).isEqualTo(MIN_QUALITY);
+    }
+
+    @Test
     public void degradesTwiceAsFastAfterSellInInitialEvenQuality() {
         //given
         int initialSellInDays = 10;
