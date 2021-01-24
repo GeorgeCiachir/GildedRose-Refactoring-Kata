@@ -26,7 +26,7 @@ public class Sulfuras implements Product {
     }
 
     private void updateSellIn() {
-        item.sellIn--;
+//        item.sellIn--;
     }
 
     @Override

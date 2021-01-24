@@ -69,4 +69,21 @@ public class AgedBrieTest extends BaseTest {
         //then
         assertThat(actual.quality).isEqualTo(MAX_QUALITY);
     }
+
+    @Test
+    public void testSellInDecrease() {
+        //given
+        int daysToPass = 60;
+        int initialSellIn = 10;
+        Item actual = new Item("Aged Brie", initialSellIn, 20);
+        Product product = Product.builder(AgedBrie::new).forItem(actual);
+
+        //when
+        for (int i = 0; i < daysToPass; i++) {
+            product.update();
+        }
+
+        //then
+        assertThat(actual.sellIn).isEqualTo(initialSellIn - daysToPass);
+    }
 }

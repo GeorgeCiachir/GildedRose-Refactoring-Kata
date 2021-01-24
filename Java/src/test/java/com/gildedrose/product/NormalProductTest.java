@@ -146,4 +146,30 @@ class NormalProductTest extends BaseTest {
         assertThat(dexterityVest.quality).isEqualTo(MIN_QUALITY);
         assertThat(anotherNormal.quality).isEqualTo(MIN_QUALITY);
     }
+
+    @Test
+    public void testSellInDecrease() {
+        //given
+        int daysToPass = 60;
+        int initialSellInDays = 10;
+        int initialQuality = 20;
+        Item elixir = new Item("Elixir of the Mongoose", initialSellInDays, initialQuality);
+        Item dexterityVest = new Item("+5 Dexterity Vest", initialSellInDays, initialQuality);
+        Item anotherNormal = new Item("a normal item", initialSellInDays, initialQuality);
+        Product elixirProduct = Product.builder(NormalProduct::new).forItem(elixir);
+        Product dexterityVestProduct = Product.builder(NormalProduct::new).forItem(dexterityVest);
+        Product anotherNormalProduct = Product.builder(NormalProduct::new).forItem(anotherNormal);
+
+        //when
+        for (int i = 0; i < daysToPass; i++) {
+            elixirProduct.update();
+            dexterityVestProduct.update();
+            anotherNormalProduct.update();
+        }
+
+        //then
+        assertThat(elixir.sellIn).isEqualTo(initialSellInDays - daysToPass);
+        assertThat(dexterityVest.sellIn).isEqualTo(initialSellInDays - daysToPass);
+        assertThat(anotherNormal.sellIn).isEqualTo(initialSellInDays - daysToPass);
+    }
 }

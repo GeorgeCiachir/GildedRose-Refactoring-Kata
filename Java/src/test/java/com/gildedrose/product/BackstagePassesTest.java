@@ -119,4 +119,21 @@ public class BackstagePassesTest extends BaseTest {
         //then
         assertThat(actual.quality).isEqualTo(MIN_QUALITY);
     }
+
+    @Test
+    public void testSellInDecrease() {
+        //given
+        int daysToPass = 60;
+        int initialSellIn = 10;
+        Item actual = new Item("Backstage passes to a TAFKAL80ETC concert", initialSellIn, 20);
+        Product product = Product.builder(BackstagePasses::new).forItem(actual);
+
+        //when
+        for (int i = 0; i < daysToPass; i++) {
+            product.update();
+        }
+
+        //then
+        assertThat(actual.sellIn).isEqualTo(initialSellIn - daysToPass);
+    }
 }

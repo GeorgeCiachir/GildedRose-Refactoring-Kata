@@ -42,4 +42,21 @@ public class SulfurasTest extends BaseTest {
         //then
         assertThat(actual.quality).isEqualTo(initialQuality);
     }
+
+    @Test
+    public void testTimeDoesNotPassForSulfuras() {
+        //given
+        int daysToPass = 60;
+        int initialSellIn = 10;
+        Item actual = new Item("Sulfuras, Hand of Ragnaros", initialSellIn, 80);
+        Product product = Product.builder(Sulfuras::new).forItem(actual);
+
+        //when
+        for (int i = 0; i < daysToPass; i++) {
+            product.update();
+        }
+
+        //then
+        assertThat(actual.sellIn).isEqualTo(initialSellIn);
+    }
 }
