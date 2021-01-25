@@ -9,11 +9,12 @@ public class BackstagePassesTest extends BaseTest {
 
     private static final int MIN_QUALITY = 0;
     private static final int MAX_QUALITY = 50;
-    private static final int TWICE_THE_QUALITY = 2;
-    private static final int THRICE_THE_QUALITY = 3;
+    private static final int NORMAL_QUALITY = 1;
+    private static final int TWICE_THE_QUALITY = 2 * NORMAL_QUALITY;
+    private static final int THRICE_THE_QUALITY = 3 * NORMAL_QUALITY;
 
     @Test
-    public void qualityIncreasesWithNormalStepBeforeTenDaysToSellIn() {
+    public void qualityIncreasesNormalBeforeTenDaysToSellIn() {
         //given
         int initialSellInDays = 40;
         int initialQuality = 2;
@@ -21,9 +22,8 @@ public class BackstagePassesTest extends BaseTest {
         Product product = new ProductBuilder(ProductType.BACKSTAGE_PASSES).buildFrom(actual);
 
         //when
+        // 29 of increase 1 -> 29
         int daysPassed = 29;
-        //don't overshoot the 10 days before sellIn
-        assertThat(daysPassed).isLessThanOrEqualTo(initialSellInDays - 10);
         for (int i = 0; i < daysPassed; i++) {
             product.update();
         }
@@ -33,7 +33,7 @@ public class BackstagePassesTest extends BaseTest {
     }
 
     @Test
-    public void qualityCanIncreaseWithNormalStepStartingFromZeroBeforeExpiring() {
+    public void qualityIncreasesNormalStartingFromZeroBeforeExpiring() {
         //given
         int initialSellInDays = 40;
         int initialQuality = 0;
@@ -41,8 +41,8 @@ public class BackstagePassesTest extends BaseTest {
         Product product = new ProductBuilder(ProductType.BACKSTAGE_PASSES).buildFrom(actual);
 
         //when
+        // 29 of increase 1 -> 29
         int daysPassed = 29;
-        //don't overshoot the 10 days before sellIn
         assertThat(daysPassed).isLessThanOrEqualTo(initialSellInDays - 10);
         for (int i = 0; i < daysPassed; i++) {
             product.update();
@@ -53,7 +53,7 @@ public class BackstagePassesTest extends BaseTest {
     }
 
     @Test
-    public void qualityIncreasesTwiceAsFastBetweenTenAndFiveDaysToSellIn() {
+    public void qualityIncreasesNormalThenTwiceThenThrice() {
         //given
         int initialSellInDays = 40;
         int initialQuality = 2;
@@ -61,42 +61,74 @@ public class BackstagePassesTest extends BaseTest {
         Product product = new ProductBuilder(ProductType.BACKSTAGE_PASSES).buildFrom(actual);
 
         //when
-        int daysPassed = 31;
-        //between 10 to 5 days before sellIn
-        assertThat(daysPassed).isLessThanOrEqualTo(initialSellInDays - 5);
-        assertThat(daysPassed).isGreaterThan(initialSellInDays - 10);
+        // 30 of increase 1 -> 30
+        // 5 of increase 2 -> 10
+        // 2 of increase 3 -> 6
+        int daysPassed = 37;
         for (int i = 0; i < daysPassed; i++) {
             product.update();
         }
 
         //then
-        int normalQuality = initialSellInDays - 10;
-        int twiceTheQuality = TWICE_THE_QUALITY * (daysPassed - (initialSellInDays - 10));
-        assertThat(actual.quality).isEqualTo(initialQuality + normalQuality + twiceTheQuality);
+        int normalQuality = 30 * NORMAL_QUALITY;
+        int twiceTheQuality = 5 * TWICE_THE_QUALITY;
+        int thriceTheQuality = 2 * THRICE_THE_QUALITY;
+        assertThat(actual.quality).isEqualTo(initialQuality + normalQuality + twiceTheQuality + thriceTheQuality);
     }
 
     @Test
-    public void qualityIncreasesThriceAsFastAfterFiveDaysToSellIn() {
+    public void qualityIncreasesNormalThenTwiceThenThriceThenTwice() {
         //given
-        int initialSellInDays = 40;
-        int initialQuality = 2;
+        int initialSellInDays = 35;
+        int initialQuality = 1;
         Item actual = new Item("Backstage passes to a TAFKAL80ETC concert", initialSellInDays, initialQuality);
         Product product = new ProductBuilder(ProductType.BACKSTAGE_PASSES).buildFrom(actual);
 
         //when
-        int daysPassed = 37;
-        //after 5 days before sellIn
-        assertThat(daysPassed).isGreaterThan(initialSellInDays - 5);
+        // 25 of increase 1 -> 25
+        // 5 of increase 2 -> 10
+        // 4 of increase 3 -> 12
+        // 1 of increase 2 -> 2
+        int daysPassed = 35;
         for (int i = 0; i < daysPassed; i++) {
             product.update();
         }
 
         //then
-        int normalQuality = initialSellInDays - 10;
-        int daysPassedAfterTwiceTheQuality = daysPassed - (initialSellInDays - 5);
-        int twiceTheQuality = TWICE_THE_QUALITY * (daysPassed - (initialSellInDays - 10) - daysPassedAfterTwiceTheQuality);
-        int thriceTheQuality = THRICE_THE_QUALITY * (daysPassed - (initialSellInDays - 5));
-        assertThat(actual.quality).isEqualTo(initialQuality + normalQuality + twiceTheQuality + thriceTheQuality);
+        int normalQuality = 25 * NORMAL_QUALITY;
+        int twiceTheQuality = 5 * TWICE_THE_QUALITY;
+        int thriceTheQuality = 4 * THRICE_THE_QUALITY;
+        int twiceTheQualityAgain = 1 * TWICE_THE_QUALITY;
+
+        assertThat(actual.quality).isEqualTo(initialQuality + normalQuality + twiceTheQuality + thriceTheQuality + twiceTheQualityAgain);
+    }
+
+    @Test
+    public void qualityIncreasesNormalThenTwiceThenThriceThenNormal() {
+        //given
+        int initialSellInDays = 35;
+        int initialQuality = 2;
+        Item actual = new Item("Backstage passes to a TAFKAL80ETC concert", initialSellInDays, initialQuality);
+        Product product = new ProductBuilder(ProductType.BACKSTAGE_PASSES).buildFrom(actual);
+
+        //when
+        // 25 of increase 1 -> 25
+        // 5 of increase 2 -> 10
+        // 4 of increase 3 -> 12
+        // 1 of increase 1 -> 1
+        int daysPassed = 35;
+        for (int i = 0; i < daysPassed; i++) {
+            product.update();
+        }
+
+        //then
+        int normalQuality = 25 * NORMAL_QUALITY;
+        int twiceTheQuality = 5 * TWICE_THE_QUALITY;
+        int thriceTheQuality = 4 * THRICE_THE_QUALITY;
+        int normalQualityAgain = 1 * NORMAL_QUALITY;
+
+        System.out.println(actual.quality);
+        assertThat(actual.quality).isEqualTo(initialQuality + normalQuality + twiceTheQuality + thriceTheQuality + normalQualityAgain);
     }
 
     @Test
@@ -108,9 +140,10 @@ public class BackstagePassesTest extends BaseTest {
         Product product = new ProductBuilder(ProductType.BACKSTAGE_PASSES).buildFrom(actual);
 
         //when
-        int daysPassed = 39;
-        //after 5 days before sellIn
-        assertThat(daysPassed).isGreaterThan(initialSellInDays - 5);
+        // 30 of increase 1 -> 30
+        // 5 of increase 2 -> 10
+        // 3 of increase 3 -> 9
+        int daysPassed = 38;
         for (int i = 0; i < daysPassed; i++) {
             product.update();
         }
@@ -122,14 +155,13 @@ public class BackstagePassesTest extends BaseTest {
     @Test
     public void qualityDropsToZeroAfterSellIn() {
         //given
-        int initialSellInDays = 40;
-        int initialQuality = 2;
+        int initialSellInDays = 10;
+        int initialQuality = 49;
         Item actual = new Item("Backstage passes to a TAFKAL80ETC concert", initialSellInDays, initialQuality);
         Product product = new ProductBuilder(ProductType.BACKSTAGE_PASSES).buildFrom(actual);
 
         //when
-        int daysPassed = 41;
-        //after 5 days before sellIn
+        int daysPassed = 11;
         assertThat(daysPassed).isGreaterThan(initialSellInDays - 5);
         for (int i = 0; i < daysPassed; i++) {
             product.update();
