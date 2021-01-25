@@ -7,11 +7,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class NormalProductTest extends BaseTest {
 
-    private static final int DEGRADE_TWICE = 2;
+    private static final int DEGRADE_NORMAL = 1;
+    private static final int DEGRADE_TWICE = 2 * DEGRADE_NORMAL;
     private static final int MIN_QUALITY = 0;
 
     @Test
-    public void degradesNormalStepBeforeSellIn() {
+    public void degradesNormalBeforeSellIn() {
         //given
         int initialSellInDays = 10;
         int initialQuality = 20;
@@ -37,33 +38,7 @@ class NormalProductTest extends BaseTest {
     }
 
     @Test
-    public void degradesNormalStepBeforeSellInNeverBelowZero() {
-        //given
-        int initialSellInDays = 10;
-        int initialQuality = 4;
-        Item elixir = new Item("Elixir of the Mongoose", initialSellInDays, initialQuality);
-        Item dexterityVest = new Item("+5 Dexterity Vest", initialSellInDays, initialQuality);
-        Item anotherNormal = new Item("a normal item", initialSellInDays, initialQuality);
-        Product elixirProduct = new ProductBuilder(ProductType.NORMAL).buildFrom(elixir);
-        Product dexterityVestProduct = new ProductBuilder(ProductType.NORMAL).buildFrom(dexterityVest);
-        Product anotherNormalProduct = new ProductBuilder(ProductType.NORMAL).buildFrom(anotherNormal);
-
-        //when
-        int daysPassed = 9;
-        for (int i = 0; i < daysPassed; i++) {
-            elixirProduct.update();
-            dexterityVestProduct.update();
-            anotherNormalProduct.update();
-        }
-
-        //then
-        assertThat(elixir.quality).isEqualTo(MIN_QUALITY);
-        assertThat(dexterityVest.quality).isEqualTo(MIN_QUALITY);
-        assertThat(anotherNormal.quality).isEqualTo(MIN_QUALITY);
-    }
-
-    @Test
-    public void degradesTwiceAsFastAfterSellInInitialEvenQuality() {
+    public void degradesNormalBeforeSellInThenTwiceAsFast() {
         //given
         int initialSellInDays = 10;
         int initialQuality = 20;
@@ -75,10 +50,9 @@ class NormalProductTest extends BaseTest {
         Product anotherNormalProduct = new ProductBuilder(ProductType.NORMAL).buildFrom(anotherNormal);
 
         //when
-        int daysAfterSellInPassed = 4;
-        // don't overshoot this, so the quality won't go to zero
-        assertThat(daysAfterSellInPassed).isLessThanOrEqualTo((initialQuality - initialSellInDays) / DEGRADE_TWICE - 1);
-        int totalDaysPassed = initialSellInDays + daysAfterSellInPassed;
+        // 10 of degradation 1 -> 10
+        // 4 of degradation 2 -> 8
+        int totalDaysPassed = 14;
         for (int i = 0; i < totalDaysPassed; i++) {
             elixirProduct.update();
             dexterityVestProduct.update();
@@ -86,13 +60,15 @@ class NormalProductTest extends BaseTest {
         }
 
         //then
-        assertThat(elixir.quality).isEqualTo(initialQuality - initialSellInDays - DEGRADE_TWICE * daysAfterSellInPassed);
-        assertThat(dexterityVest.quality).isEqualTo(initialQuality - initialSellInDays - DEGRADE_TWICE * daysAfterSellInPassed);
-        assertThat(anotherNormal.quality).isEqualTo(initialQuality - initialSellInDays - DEGRADE_TWICE * daysAfterSellInPassed);
+        int normalDegradation = initialSellInDays * DEGRADE_NORMAL;
+        int doubleDegradation = 4 * DEGRADE_TWICE;
+        assertThat(elixir.quality).isEqualTo(initialQuality - normalDegradation - doubleDegradation);
+        assertThat(dexterityVest.quality).isEqualTo(initialQuality - normalDegradation - doubleDegradation);
+        assertThat(anotherNormal.quality).isEqualTo(initialQuality - normalDegradation - doubleDegradation);
     }
 
     @Test
-    public void degradesTwiceAsFastAfterSellInInitialOddQualityNotBelowZero() {
+    public void degradesNormalBeforeSellInThenTwiceAsFastThenNormal() {
         //given
         int initialSellInDays = 10;
         int initialQuality = 21;
@@ -104,10 +80,10 @@ class NormalProductTest extends BaseTest {
         Product anotherNormalProduct = new ProductBuilder(ProductType.NORMAL).buildFrom(anotherNormal);
 
         //when
-        int daysAfterSellInPassed = 6;
-        // don't overshoot this, so the quality won't go to zero
-        assertThat(daysAfterSellInPassed).isGreaterThanOrEqualTo((initialQuality - initialSellInDays) / DEGRADE_TWICE + 1);
-        int totalDaysPassed = initialSellInDays + daysAfterSellInPassed;
+        // 10 of degradation 1 -> 10
+        // 5 of degradation 2 -> 10
+        // 1 of degradation 1 -> 1
+        int totalDaysPassed = 16;
         for (int i = 0; i < totalDaysPassed; i++) {
             elixirProduct.update();
             dexterityVestProduct.update();

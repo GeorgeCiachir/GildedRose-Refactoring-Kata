@@ -39,8 +39,8 @@ public class ConjuredManaTest extends BaseTest {
         Product conjuredProduct = new ProductBuilder(ProductType.CONJURED_MANA).buildFrom(conjured);
 
         //when
-        // 1 of degradation 2
-        // 1 of degradation 1
+        // 1 of degradation 2 -> 2
+        // 1 of degradation 1 -> 1
         int daysPassed = 3;
         for (int i = 0; i < daysPassed; i++) {
             conjuredProduct.update();
@@ -59,9 +59,9 @@ public class ConjuredManaTest extends BaseTest {
         Product conjuredProduct = new ProductBuilder(ProductType.CONJURED_MANA).buildFrom(conjured);
 
         //when
-        // 10 of degradation 2
-        // 2 of degradation 4
-        // 1 of degradation 2
+        // 10 of degradation 2 -> 20
+        // 2 of degradation 4 -> 8
+        // 1 of degradation 2 -> 2
         int totalDaysPassed = 13;
         for (int i = 0; i < totalDaysPassed; i++) {
             conjuredProduct.update();
@@ -84,10 +84,10 @@ public class ConjuredManaTest extends BaseTest {
         Product conjuredProduct = new ProductBuilder(ProductType.CONJURED_MANA).buildFrom(conjured);
 
         //when
-        // 10 of degradation 2
-        // 2 of degradation 4
-        // 1 of degradation 2
-        // 1 of degradation 1
+        // 10 of degradation 2 -> 20
+        // 2 of degradation 4 -> 8
+        // 1 of degradation 2 -> 2
+        // 1 of degradation 1 -> 1
         int totalDaysPassed = 14;
         for (int i = 0; i < totalDaysPassed; i++) {
             conjuredProduct.update();
