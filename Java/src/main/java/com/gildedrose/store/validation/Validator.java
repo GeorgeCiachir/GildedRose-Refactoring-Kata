@@ -1,4 +1,4 @@
-package com.gildedrose.product.error;
+package com.gildedrose.store.validation;
 
 import com.gildedrose.Item;
 

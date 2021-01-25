@@ -1,7 +1,8 @@
-package com.gildedrose.product;
+package com.gildedrose.store;
 
 import com.gildedrose.Item;
-import com.gildedrose.product.error.ValidationError;
+import com.gildedrose.store.product.Product;
+import com.gildedrose.store.validation.ValidationError;
 
 import java.util.List;
 import java.util.stream.Stream;

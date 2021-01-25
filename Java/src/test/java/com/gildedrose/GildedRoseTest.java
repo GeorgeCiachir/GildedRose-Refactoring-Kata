@@ -1,7 +1,7 @@
 package com.gildedrose;
 
-import com.gildedrose.product.Product;
-import com.gildedrose.product.ProductFactory;
+import com.gildedrose.store.product.Product;
+import com.gildedrose.store.ProductFactory;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

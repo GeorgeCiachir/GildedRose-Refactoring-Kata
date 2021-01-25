@@ -1,11 +1,11 @@
-package com.gildedrose.product;
+package com.gildedrose.store.product;
 
 import com.gildedrose.Item;
-import com.gildedrose.product.error.Validator;
+import com.gildedrose.store.validation.Validator;
 
 import java.util.List;
 
-import static com.gildedrose.product.error.ValidationError.SULFURAS_CUSTOM;
+import static com.gildedrose.store.validation.ValidationError.SULFURAS_CUSTOM;
 import static java.util.Collections.singletonList;
 
 public class Sulfuras implements Product {

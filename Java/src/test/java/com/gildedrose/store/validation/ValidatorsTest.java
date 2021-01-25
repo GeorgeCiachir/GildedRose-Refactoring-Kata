@@ -1,4 +1,4 @@
-package com.gildedrose.product.error;
+package com.gildedrose.store.validation;
 
 import com.gildedrose.Item;
 import org.junit.jupiter.api.Test;
@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Test;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-import static com.gildedrose.product.error.ValidationError.HIGHER_THAN_FIFTY;
-import static com.gildedrose.product.error.ValidationError.LOWER_THAN_ZERO;
+import static com.gildedrose.store.validation.ValidationError.HIGHER_THAN_FIFTY;
+import static com.gildedrose.store.validation.ValidationError.LOWER_THAN_ZERO;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ValidatorsTest {

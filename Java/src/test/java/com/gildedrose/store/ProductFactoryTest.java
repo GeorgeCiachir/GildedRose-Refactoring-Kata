@@ -1,6 +1,11 @@
-package com.gildedrose.product;
+package com.gildedrose.store;
 
 import com.gildedrose.Item;
+import com.gildedrose.store.product.AgedBrie;
+import com.gildedrose.store.product.BackstagePasses;
+import com.gildedrose.store.product.ConjuredMana;
+import com.gildedrose.store.product.NormalProduct;
+import com.gildedrose.store.product.Sulfuras;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

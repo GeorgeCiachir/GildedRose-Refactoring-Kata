@@ -1,4 +1,4 @@
-package com.gildedrose.product.error;
+package com.gildedrose.store.validation;
 
 public enum ValidationError {
 

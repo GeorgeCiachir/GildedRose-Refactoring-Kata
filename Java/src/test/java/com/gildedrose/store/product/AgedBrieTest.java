@@ -1,6 +1,8 @@
-package com.gildedrose.product;
+package com.gildedrose.store.product;
 
 import com.gildedrose.Item;
+import com.gildedrose.store.ProductBuilder;
+import com.gildedrose.store.ProductType;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

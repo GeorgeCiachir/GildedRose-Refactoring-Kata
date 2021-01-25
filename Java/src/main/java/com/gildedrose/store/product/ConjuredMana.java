@@ -1,11 +1,11 @@
-package com.gildedrose.product;
+package com.gildedrose.store.product;
 
 import com.gildedrose.Item;
-import com.gildedrose.product.error.Validator;
+import com.gildedrose.store.validation.Validator;
 
 import java.util.List;
 
-import static com.gildedrose.product.error.Validators.defaultValidators;
+import static com.gildedrose.store.validation.Validators.defaultValidators;
 
 public class ConjuredMana implements Product {
 

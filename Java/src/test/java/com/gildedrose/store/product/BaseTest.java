@@ -1,6 +1,7 @@
-package com.gildedrose.product;
+package com.gildedrose.store.product;
 
 import com.gildedrose.Item;
+import com.gildedrose.store.ProductFactory;
 import org.junit.jupiter.api.Test;
 
 import java.util.stream.Stream;

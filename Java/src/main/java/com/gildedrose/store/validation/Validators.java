@@ -1,10 +1,10 @@
-package com.gildedrose.product.error;
+package com.gildedrose.store.validation;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static com.gildedrose.product.error.ValidationError.HIGHER_THAN_FIFTY;
-import static com.gildedrose.product.error.ValidationError.LOWER_THAN_ZERO;
+import static com.gildedrose.store.validation.ValidationError.HIGHER_THAN_FIFTY;
+import static com.gildedrose.store.validation.ValidationError.LOWER_THAN_ZERO;
 
 public final class Validators {
 

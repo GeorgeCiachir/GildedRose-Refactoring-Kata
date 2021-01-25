@@ -1,6 +1,7 @@
-package com.gildedrose.product;
+package com.gildedrose.store;
 
 import com.gildedrose.Item;
+import com.gildedrose.store.product.Product;
 
 import java.util.Arrays;
 import java.util.Map;

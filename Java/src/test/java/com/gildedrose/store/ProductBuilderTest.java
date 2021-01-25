@@ -1,4 +1,4 @@
-package com.gildedrose.product;
+package com.gildedrose.store;
 
 import com.gildedrose.Item;
 import org.junit.jupiter.api.Test;
