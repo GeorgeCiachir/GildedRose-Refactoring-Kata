@@ -8,10 +8,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class AgedBrieTest extends BaseTest {
 
     private static final int MAX_QUALITY = 50;
-    private static final int TWICE_THE_QUALITY = 2;
+    private static final int NORMAL_INCREASE = 1;
+    private static final int DOUBLE_INCREASE = 2 * NORMAL_INCREASE;
 
     @Test
-    public void qualityIncreasesWithNormalStepGivenInitialSellInDaysNotExceeded() {
+    public void qualityIncreasesNormalGivenInitialSellInDaysNotExceeded() {
         //given
         int initialSellInDays = 10;
         int initialQuality = 20;
@@ -19,8 +20,7 @@ public class AgedBrieTest extends BaseTest {
         Product product = new ProductBuilder(ProductType.AGED_BRIE).buildFrom(actual);
 
         //when
-        int daysPassed = initialSellInDays;
-        // don't overshoot initialSellInDays -> quality increases twice as fast
+        int daysPassed = initialSellInDays - 1;
         assertThat(daysPassed).isLessThanOrEqualTo(initialSellInDays);
         for (int i = 0; i < daysPassed; i++) {
             product.update();
@@ -31,7 +31,7 @@ public class AgedBrieTest extends BaseTest {
     }
 
     @Test
-    public void qualityIncreasesTwiceAsFastGivenInitialSellInDaysPassed() {
+    public void qualityIncreasesNormalBeforeSellInThenTwiceAsFast() {
         //given
         int initialSellInDays = 10;
         int initialQuality = 20;
@@ -39,16 +39,38 @@ public class AgedBrieTest extends BaseTest {
         Product product = new ProductBuilder(ProductType.AGED_BRIE).buildFrom(actual);
 
         //when
-        int daysWithDoubleQualityIncrease = 9;
-        int daysPassed = initialSellInDays + daysWithDoubleQualityIncrease;
-        // don't overshoot MAX_QUALITY
-        assertThat(daysWithDoubleQualityIncrease).isLessThanOrEqualTo((MAX_QUALITY - initialSellInDays - initialQuality) / TWICE_THE_QUALITY);
+        // 10 of increase 1 -> 10
+        // 9 of increase 2 -> 18
+        int daysPassed = 19;
         for (int i = 0; i < daysPassed; i++) {
             product.update();
         }
 
         //then
-        assertThat(actual.quality).isEqualTo(initialQuality + initialSellInDays + TWICE_THE_QUALITY * daysWithDoubleQualityIncrease);
+        int normalIncrease = 10 * NORMAL_INCREASE;
+        int doubleIncrease = 9 * DOUBLE_INCREASE;
+        assertThat(actual.quality).isEqualTo(initialQuality + normalIncrease + doubleIncrease);
+    }
+
+    @Test
+    public void qualityIncreasesNormalBeforeSellInThenTwiceAsFastThenNormal() {
+        //given
+        int initialSellInDays = 40;
+        int initialQuality = 1;
+        Item actual = new Item("Aged Brie", initialSellInDays, initialQuality);
+        Product product = new ProductBuilder(ProductType.AGED_BRIE).buildFrom(actual);
+
+        //when
+        // 40 of increase 1 -> 40
+        // 4 of increase 2 -> 8
+        // 1 of increase 1-> 1
+        int daysPassed = 45;
+        for (int i = 0; i < daysPassed; i++) {
+            product.update();
+        }
+
+        //then
+        assertThat(actual.quality).isEqualTo(MAX_QUALITY);
     }
 
     @Test
@@ -60,8 +82,9 @@ public class AgedBrieTest extends BaseTest {
         Product product = new ProductBuilder(ProductType.AGED_BRIE).buildFrom(actual);
 
         //when
-        int daysWithDoubleQualityIncrease = 10;
-        int daysPassed = initialSellInDays + daysWithDoubleQualityIncrease + 2;
+        // 10 of increase 1 -> 10
+        // 20 of increase 2 -> 40
+        int daysPassed = 30;
         for (int i = 0; i < daysPassed; i++) {
             product.update();
         }

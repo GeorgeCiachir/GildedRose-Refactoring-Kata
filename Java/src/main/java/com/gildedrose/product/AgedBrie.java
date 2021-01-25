@@ -30,19 +30,25 @@ public class AgedBrie implements Product {
             return;
         }
 
-        if (withinSellInPeriod()) {
-            normalQualityIncrease();
-        } else {
+        if (qualityShouldIncreaseTwice()) {
             doubleQualityIncrease();
+            return;
         }
+
+        normalQualityIncrease();
+    }
+
+    private boolean qualityShouldIncreaseTwice() {
+        return sellInPassed()
+                && qualityCanIncreaseTwice();
+    }
+
+    private boolean qualityCanIncreaseTwice() {
+        return item.quality <= MAX_QUALITY - DOUBLE_INCREASE;
     }
 
     private boolean maxQualityReached() {
         return item.quality == MAX_QUALITY;
-    }
-
-    private boolean withinSellInPeriod() {
-        return item.sellIn > 0;
     }
 
     private void normalQualityIncrease() {
@@ -51,6 +57,14 @@ public class AgedBrie implements Product {
 
     private void doubleQualityIncrease() {
         item.quality = item.quality + DOUBLE_INCREASE;
+    }
+
+    private boolean withinSellInPeriod() {
+        return item.sellIn > 0;
+    }
+
+    private boolean sellInPassed() {
+        return !withinSellInPeriod();
     }
 
     private void updateSellIn() {
