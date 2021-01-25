@@ -29,7 +29,28 @@ public class BackstagePassesTest extends BaseTest {
         }
 
         //then
-        System.out.println(actual.quality);
+        assertThat(actual.quality).isEqualTo(initialQuality + daysPassed);
+    }
+
+
+
+    @Test
+    public void qualityCanIncreaseWithNormalStepStartingFromZeroBeforeExpiring() {
+        //given
+        int initialSellInDays = 40;
+        int initialQuality = 0;
+        Item actual = new Item("Backstage passes to a TAFKAL80ETC concert", initialSellInDays, initialQuality);
+        Product product = Product.builder(BackstagePasses::new).forItem(actual);
+
+        //when
+        int daysPassed = 29;
+        //don't overshoot the 10 days before sellIn
+        assertThat(daysPassed).isLessThanOrEqualTo(initialSellInDays - 10);
+        for (int i = 0; i < daysPassed; i++) {
+            product.update();
+        }
+
+        //then
         assertThat(actual.quality).isEqualTo(initialQuality + daysPassed);
     }
 

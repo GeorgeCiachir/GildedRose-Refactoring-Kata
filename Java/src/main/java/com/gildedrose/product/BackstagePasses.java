@@ -48,8 +48,6 @@ public class BackstagePasses implements Product {
         normalQualityIncrease();
     }
 
-    //TODO: add test for this case.
-    // For the others it was enough to check the quality drop to 0
     private boolean expired() {
         return item.quality == 0 && sellInPassed();
     }
