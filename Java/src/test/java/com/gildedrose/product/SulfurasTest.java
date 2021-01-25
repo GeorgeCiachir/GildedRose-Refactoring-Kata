@@ -17,7 +17,7 @@ public class SulfurasTest extends BaseTest {
 
         //when
         try {
-            Product.builder(Sulfuras::new).forItem(actual);
+            new ProductBuilder(ProductType.SULFURAS).buildFrom(actual);
             fail("should validate quality and throw IllegalArgumentException if different than zero");
         } catch (Exception e) {
             //then
@@ -31,7 +31,7 @@ public class SulfurasTest extends BaseTest {
         int initialSellInDays = 10;
         int initialQuality = 80;
         Item actual = new Item("Sulfuras, Hand of Ragnaros", initialSellInDays, initialQuality);
-        Product product = Product.builder(Sulfuras::new).forItem(actual);
+        Product product = new ProductBuilder(ProductType.SULFURAS).buildFrom(actual);
 
         //when
         int daysPassed = initialSellInDays + 1;
@@ -49,7 +49,7 @@ public class SulfurasTest extends BaseTest {
         int daysToPass = 60;
         int initialSellIn = 10;
         Item actual = new Item("Sulfuras, Hand of Ragnaros", initialSellIn, 80);
-        Product product = Product.builder(Sulfuras::new).forItem(actual);
+        Product product = new ProductBuilder(ProductType.SULFURAS).buildFrom(actual);
 
         //when
         for (int i = 0; i < daysToPass; i++) {

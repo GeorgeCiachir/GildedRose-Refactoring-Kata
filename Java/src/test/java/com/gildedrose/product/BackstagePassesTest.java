@@ -18,7 +18,7 @@ public class BackstagePassesTest extends BaseTest {
         int initialSellInDays = 40;
         int initialQuality = 2;
         Item actual = new Item("Backstage passes to a TAFKAL80ETC concert", initialSellInDays, initialQuality);
-        Product product = Product.builder(BackstagePasses::new).forItem(actual);
+        Product product = new ProductBuilder(ProductType.BACKSTAGE_PASSES).buildFrom(actual);
 
         //when
         int daysPassed = 29;
@@ -32,15 +32,13 @@ public class BackstagePassesTest extends BaseTest {
         assertThat(actual.quality).isEqualTo(initialQuality + daysPassed);
     }
 
-
-
     @Test
     public void qualityCanIncreaseWithNormalStepStartingFromZeroBeforeExpiring() {
         //given
         int initialSellInDays = 40;
         int initialQuality = 0;
         Item actual = new Item("Backstage passes to a TAFKAL80ETC concert", initialSellInDays, initialQuality);
-        Product product = Product.builder(BackstagePasses::new).forItem(actual);
+        Product product = new ProductBuilder(ProductType.BACKSTAGE_PASSES).buildFrom(actual);
 
         //when
         int daysPassed = 29;
@@ -60,7 +58,7 @@ public class BackstagePassesTest extends BaseTest {
         int initialSellInDays = 40;
         int initialQuality = 2;
         Item actual = new Item("Backstage passes to a TAFKAL80ETC concert", initialSellInDays, initialQuality);
-        Product product = Product.builder(BackstagePasses::new).forItem(actual);
+        Product product = new ProductBuilder(ProductType.BACKSTAGE_PASSES).buildFrom(actual);
 
         //when
         int daysPassed = 31;
@@ -83,7 +81,7 @@ public class BackstagePassesTest extends BaseTest {
         int initialSellInDays = 40;
         int initialQuality = 2;
         Item actual = new Item("Backstage passes to a TAFKAL80ETC concert", initialSellInDays, initialQuality);
-        Product product = Product.builder(BackstagePasses::new).forItem(actual);
+        Product product = new ProductBuilder(ProductType.BACKSTAGE_PASSES).buildFrom(actual);
 
         //when
         int daysPassed = 37;
@@ -107,7 +105,7 @@ public class BackstagePassesTest extends BaseTest {
         int initialSellInDays = 40;
         int initialQuality = 2;
         Item actual = new Item("Backstage passes to a TAFKAL80ETC concert", initialSellInDays, initialQuality);
-        Product product = Product.builder(BackstagePasses::new).forItem(actual);
+        Product product = new ProductBuilder(ProductType.BACKSTAGE_PASSES).buildFrom(actual);
 
         //when
         int daysPassed = 39;
@@ -127,7 +125,7 @@ public class BackstagePassesTest extends BaseTest {
         int initialSellInDays = 40;
         int initialQuality = 2;
         Item actual = new Item("Backstage passes to a TAFKAL80ETC concert", initialSellInDays, initialQuality);
-        Product product = Product.builder(BackstagePasses::new).forItem(actual);
+        Product product = new ProductBuilder(ProductType.BACKSTAGE_PASSES).buildFrom(actual);
 
         //when
         int daysPassed = 41;
@@ -147,7 +145,7 @@ public class BackstagePassesTest extends BaseTest {
         int daysToPass = 60;
         int initialSellIn = 10;
         Item actual = new Item("Backstage passes to a TAFKAL80ETC concert", initialSellIn, 20);
-        Product product = Product.builder(BackstagePasses::new).forItem(actual);
+        Product product = new ProductBuilder(ProductType.BACKSTAGE_PASSES).buildFrom(actual);
 
         //when
         for (int i = 0; i < daysToPass; i++) {

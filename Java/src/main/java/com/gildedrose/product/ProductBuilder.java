@@ -1,22 +1,34 @@
 package com.gildedrose.product;
 
 import com.gildedrose.Item;
+import com.gildedrose.product.error.ValidationError;
 
-import java.util.function.Function;
+import java.util.List;
+import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.toList;
 
 public class ProductBuilder {
 
-    private final Function<Item, Product> productConstructor;
+    private final ProductType productType;
 
-    public ProductBuilder(Function<Item, Product> productConstructor) {
-        this.productConstructor = productConstructor;
+    public ProductBuilder(ProductType productType) {
+        this.productType = productType;
     }
 
-    public Product forItem(Item item) {
-        if (item.quality < 0) {
-            throw new IllegalArgumentException("The quality should never be lower than zero");
-        }
+    public Product buildFrom(Item item) {
+        validate(item);
+        return productType.getProductConstructor().apply(item);
+    }
 
-        return productConstructor.apply(item);
+    private void validate(Item item) {
+        List<ValidationError> errors = productType.getProductValidators().stream()
+                .map(validator -> validator.validate(item))
+                .flatMap(o -> o.map(Stream::of).orElseGet(Stream::empty))
+                .collect(toList());
+
+        if (!errors.isEmpty()) {
+            throw new IllegalArgumentException("Validation errors: " + errors);
+        }
     }
 }

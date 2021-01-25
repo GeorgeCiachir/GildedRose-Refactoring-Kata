@@ -1,6 +1,12 @@
 package com.gildedrose.product;
 
 import com.gildedrose.Item;
+import com.gildedrose.product.error.Validator;
+
+import java.util.List;
+
+import static com.gildedrose.product.error.ValidationError.SULFURAS_CUSTOM;
+import static java.util.Collections.singletonList;
 
 public class Sulfuras implements Product {
 
@@ -10,9 +16,6 @@ public class Sulfuras implements Product {
 
     public Sulfuras(Item item) {
         this.item = item;
-        if (item.quality != FIXED_QUALITY) {
-            throw new IllegalArgumentException("The quality of Sulfuras should always be 80");
-        }
     }
 
     @Override
@@ -26,7 +29,12 @@ public class Sulfuras implements Product {
     }
 
     private void updateSellIn() {
-//        item.sellIn--;
+        // Do nothing. Sulfuras doesn't age
+    }
+
+    public static List<Validator> getValidators() {
+        Validator validator = new Validator(item -> item.quality != FIXED_QUALITY, SULFURAS_CUSTOM);
+        return singletonList(validator);
     }
 
     @Override

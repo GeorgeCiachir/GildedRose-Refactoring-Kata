@@ -4,30 +4,22 @@ import com.gildedrose.Item;
 
 import java.util.Arrays;
 import java.util.Map;
-import java.util.function.Function;
 
 import static java.util.stream.Collectors.toMap;
 
 public class ProductFactory {
 
-    private static final Map<String, Function<Item, Product>> CONSTRUCTORS = getProductConstructors();
+    private static final Map<String, ProductType> PRODUCT_TYPES = getProductTypes();
 
-    private static Map<String, Function<Item, Product>> getProductConstructors() {
+    private static Map<String, ProductType> getProductTypes() {
         return Arrays.stream(ProductType.values())
-                .collect(toMap(ProductType::getItemName, ProductType::getProductConstructor));
+                .collect(toMap(ProductType::getItemName, type -> type));
     }
 
     public static Product newProduct(Item item) {
-        Function<Item, Product> productConstructor =
-                CONSTRUCTORS.getOrDefault(item.name, defaultProductConstructor());
+        ProductType productType = PRODUCT_TYPES.getOrDefault(item.name, ProductType.NORMAL);
 
-        return Product
-                .builder(productConstructor)
-                .forItem(item);
+        return new ProductBuilder(productType)
+                .buildFrom(item);
     }
-
-    private static Function<Item, Product> defaultProductConstructor() {
-        return CONSTRUCTORS.get(ProductType.NORMAL.getItemName());
-    }
-
 }

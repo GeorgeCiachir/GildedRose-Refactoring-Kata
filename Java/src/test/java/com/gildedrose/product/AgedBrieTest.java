@@ -16,7 +16,7 @@ public class AgedBrieTest extends BaseTest {
         int initialSellInDays = 10;
         int initialQuality = 20;
         Item actual = new Item("Aged Brie", initialSellInDays, initialQuality);
-        Product product = Product.builder(AgedBrie::new).forItem(actual);
+        Product product = new ProductBuilder(ProductType.AGED_BRIE).buildFrom(actual);
 
         //when
         int daysPassed = initialSellInDays;
@@ -36,7 +36,7 @@ public class AgedBrieTest extends BaseTest {
         int initialSellInDays = 10;
         int initialQuality = 20;
         Item actual = new Item("Aged Brie", initialSellInDays, initialQuality);
-        Product product = Product.builder(AgedBrie::new).forItem(actual);
+        Product product = new ProductBuilder(ProductType.AGED_BRIE).buildFrom(actual);
 
         //when
         int daysWithDoubleQualityIncrease = 9;
@@ -57,7 +57,7 @@ public class AgedBrieTest extends BaseTest {
         int initialSellInDays = 10;
         int initialQuality = 20;
         Item actual = new Item("Aged Brie", initialSellInDays, initialQuality);
-        Product product = Product.builder(AgedBrie::new).forItem(actual);
+        Product product = new ProductBuilder(ProductType.AGED_BRIE).buildFrom(actual);
 
         //when
         int daysWithDoubleQualityIncrease = 10;
@@ -76,7 +76,7 @@ public class AgedBrieTest extends BaseTest {
         int daysToPass = 60;
         int initialSellIn = 10;
         Item actual = new Item("Aged Brie", initialSellIn, 20);
-        Product product = Product.builder(AgedBrie::new).forItem(actual);
+        Product product = new ProductBuilder(ProductType.AGED_BRIE).buildFrom(actual);
 
         //when
         for (int i = 0; i < daysToPass; i++) {

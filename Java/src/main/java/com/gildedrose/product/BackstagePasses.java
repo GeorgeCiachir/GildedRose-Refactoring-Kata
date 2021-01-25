@@ -1,6 +1,11 @@
 package com.gildedrose.product;
 
 import com.gildedrose.Item;
+import com.gildedrose.product.error.Validator;
+
+import java.util.List;
+
+import static com.gildedrose.product.error.Validators.defaultValidators;
 
 public class BackstagePasses implements Product {
 
@@ -102,6 +107,10 @@ public class BackstagePasses implements Product {
 
     private void updateSellIn() {
         item.sellIn--;
+    }
+
+    public static List<Validator> getValidators() {
+        return defaultValidators();
     }
 
     @Override
