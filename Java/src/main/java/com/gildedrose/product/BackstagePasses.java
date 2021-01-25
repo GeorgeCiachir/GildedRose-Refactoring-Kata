@@ -54,11 +54,16 @@ public class BackstagePasses implements Product {
     }
 
     private boolean expired() {
-        return item.quality == 0 && sellInPassed();
+        return item.quality == 0
+                && sellInPassed();
     }
 
     private boolean sellInPassed() {
-        return item.sellIn <= 0;
+        return !withinSellInPeriod();
+    }
+
+    private boolean withinSellInPeriod() {
+        return item.sellIn > 0;
     }
 
     private boolean maxQualityReached() {
