@@ -12,7 +12,7 @@ public enum ProductType {
     AGED_BRIE("Aged Brie", AgedBrie::new, AgedBrie.getValidators()),
     SULFURAS("Sulfuras, Hand of Ragnaros", Sulfuras::new, Sulfuras.getValidators()),
     BACKSTAGE_PASSES("Backstage passes to a TAFKAL80ETC concert", BackstagePasses::new, BackstagePasses.getValidators()),
-    CONJURED("Conjured Mana Cake", ConjuredMana::new, ConjuredMana.getValidators());
+    CONJURED_MANA("Conjured Mana Cake", ConjuredMana::new, ConjuredMana.getValidators());
 
     private final String itemName;
     private final Function<Item, Product> productConstructor;
