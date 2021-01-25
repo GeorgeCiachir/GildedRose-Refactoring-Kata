@@ -29,7 +29,7 @@ public class NormalProduct implements Product {
             return;
         }
 
-        if (canDegradeTwice()) {
+        if (shouldDegradeTwice()) {
             degradeTwice();
         } else {
             degradeNormal();
@@ -52,7 +52,7 @@ public class NormalProduct implements Product {
         item.quality = item.quality - DOUBLE_DEGRADATION;
     }
 
-    private boolean canDegradeTwice() {
+    private boolean shouldDegradeTwice() {
         return item.quality >= 2;
     }
 
