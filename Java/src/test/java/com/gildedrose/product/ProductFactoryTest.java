@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class ProductFactoryTest {
 
     @Test
-    public void testAppropriateProductCreation() {
+    public void verifyAppropriateProductCreation() {
         Item dexterityVest = new Item("+5 Dexterity Vest", 10, 20);
         Item elixir = new Item("Elixir of the Mongoose", 5, 7);
         Item someNewNormalItem = new Item("New Normal Item", 5, 7);

@@ -8,9 +8,10 @@ import static org.junit.jupiter.api.Assertions.fail;
 class ProductBuilderTest {
 
     @Test
-    void validateQualityNotBelowZero() {
+    void verifyValidatorsAreApplied() {
         //given
-        Item item = new Item("Some name", 2, -1);
+        int minimumQuality = 0;
+        Item item = new Item("Some name", 2, minimumQuality - 1);
         ProductBuilder productBuilder = new ProductBuilder(ProductType.NORMAL);
 
         try {

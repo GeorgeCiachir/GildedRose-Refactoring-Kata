@@ -13,9 +13,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 class ValidatorsTest {
 
     @Test
-    void validateItemHasLowerThanZeroQualityError() {
+    void verifyMinQualityValidation() {
         //given
-        Item someItem = new Item("Some name", 1, -1);
+        int minQuality = 0;
+        Item someItem = new Item("Some name", 1, minQuality - 1);
 
         //when
         Optional<ValidationError> optionalError = Validators.defaultValidators().stream()
@@ -29,9 +30,10 @@ class ValidatorsTest {
     }
 
     @Test
-    void validateItemHasHigherThanFiftyQualityError() {
+    void verifyMaxQualityValidation() {
         //given
-        Item someItem = new Item("Some name", 1, 51);
+        int maxQuality = 50;
+        Item someItem = new Item("Some name", 1, maxQuality + 1);
 
         //when
         Optional<ValidationError> optionalError = Validators.defaultValidators().stream()

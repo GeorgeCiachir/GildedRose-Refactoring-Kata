@@ -11,9 +11,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 class ValidatorTest {
 
     @Test
-    void validateItemHasErrors() {
+    void verifyItemHasErrors() {
         //given
-        Item someItem = new Item("Some name", 1, -1);
+        int minQuality = 0;
+        Item someItem = new Item("Some name", 1, minQuality - 1);
         Validator validator = new Validator(item -> item.quality < 0, LOWER_THAN_ZERO);
 
         //when
@@ -24,9 +25,10 @@ class ValidatorTest {
     }
 
     @Test
-    void validateItemHasNoErrors() {
+    void verifyItemHasNoErrors() {
         //given
-        Item someItem = new Item("Some name", 1, 1);
+        int minQuality = 0;
+        Item someItem = new Item("Some name", 1, minQuality);
         Validator validator = new Validator(item -> item.quality < 0, LOWER_THAN_ZERO);
 
         //when

@@ -8,12 +8,13 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 public class SulfurasTest extends BaseTest {
 
+    private static final int SULFURAS_FIXED_QUALITY = 80;
+
     @Test
-    public void testProductCreationAcceptingSpecificQuality() {
+    public void verifyCreationAcceptingSpecificQuality() {
         //given
-        int initialSellInDays = 10;
         int initialQuality = 50;
-        Item actual = new Item("Sulfuras, Hand of Ragnaros", initialSellInDays, initialQuality);
+        Item actual = new Item("Sulfuras, Hand of Ragnaros", 10, initialQuality);
 
         //when
         try {
@@ -26,11 +27,10 @@ public class SulfurasTest extends BaseTest {
     }
 
     @Test
-    public void qualityRemainsFixed() {
+    public void verifyQualityNeverChanges() {
         //given
         int initialSellInDays = 10;
-        int initialQuality = 80;
-        Item actual = new Item("Sulfuras, Hand of Ragnaros", initialSellInDays, initialQuality);
+        Item actual = new Item("Sulfuras, Hand of Ragnaros", initialSellInDays, SULFURAS_FIXED_QUALITY);
         Product product = new ProductBuilder(ProductType.SULFURAS).buildFrom(actual);
 
         //when
@@ -40,15 +40,15 @@ public class SulfurasTest extends BaseTest {
         }
 
         //then
-        assertThat(actual.quality).isEqualTo(initialQuality);
+        assertThat(actual.quality).isEqualTo(SULFURAS_FIXED_QUALITY);
     }
 
     @Test
-    public void testTimeDoesNotPassForSulfuras() {
+    public void verifyTimeDoesNotPassForSulfuras() {
         //given
         int daysToPass = 60;
         int initialSellIn = 10;
-        Item actual = new Item("Sulfuras, Hand of Ragnaros", initialSellIn, 80);
+        Item actual = new Item("Sulfuras, Hand of Ragnaros", initialSellIn, SULFURAS_FIXED_QUALITY);
         Product product = new ProductBuilder(ProductType.SULFURAS).buildFrom(actual);
 
         //when

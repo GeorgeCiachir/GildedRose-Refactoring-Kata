@@ -12,7 +12,7 @@ public class ConjuredManaTest extends BaseTest {
     private static final int MIN_QUALITY = 0;
 
     @Test
-    public void degradesNormalBeforeSellIn() {
+    public void qualityDegradesNormalBeforeSellIn() {
         //given
         int initialSellInDays = 10;
         int initialQuality = 30;
@@ -31,7 +31,7 @@ public class ConjuredManaTest extends BaseTest {
     }
 
     @Test
-    public void degradesNormalThenStepOneBeforeSellIn() {
+    public void qualityDegradesNormalThenStepOneBeforeSellIn() {
         //given
         int initialSellInDays = 10;
         int initialQuality = 3;
@@ -51,7 +51,7 @@ public class ConjuredManaTest extends BaseTest {
     }
 
     @Test
-    public void degradesNormalBeforeSellInThenTwiceAsFastThenNormal() {
+    public void qualityDegradesNormalBeforeSellInThenTwiceAsFastThenNormal() {
         //given
         int initialSellInDays = 10;
         int initialQuality = 31;
@@ -76,7 +76,7 @@ public class ConjuredManaTest extends BaseTest {
     }
 
     @Test
-    public void degradesNormalBeforeSellInThenTwiceAsFastThenNormalThenStepOne() {
+    public void qualityDegradesNormalBeforeSellInThenTwiceAsFastThenNormalThenStepOne() {
         //given
         int initialSellInDays = 10;
         int initialQuality = 31;
@@ -98,7 +98,7 @@ public class ConjuredManaTest extends BaseTest {
     }
 
     @Test
-    public void qualityNeverGoesBelowZero() {
+    public void verifyQualityNeverBelowMinimum() {
         //given
         int initialSellInDays = 10;
         int initialQuality = 10;
@@ -116,7 +116,7 @@ public class ConjuredManaTest extends BaseTest {
     }
 
     @Test
-    public void testSellInDecrease() {
+    public void verifySellInDecreases() {
         //given
         int initialSellInDays = 10;
         int initialQuality = 20;

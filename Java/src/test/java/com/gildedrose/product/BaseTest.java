@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class BaseTest {
 
     @Test
-    void testToString() {
+    void verifyProductReplicatesItemToString() {
         //given
         Item[] items = new Item[]{
                 new Item("+5 Dexterity Vest", 10, 20),
@@ -27,6 +27,5 @@ public class BaseTest {
         Stream.of(items)
                 .collect(toMap(item -> item, ProductFactory::newProduct))
                 .forEach(((item, product) -> assertThat(item.toString()).isEqualTo(product.toString())));
-
     }
 }

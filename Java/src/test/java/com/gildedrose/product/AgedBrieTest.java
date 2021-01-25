@@ -12,7 +12,7 @@ public class AgedBrieTest extends BaseTest {
     private static final int DOUBLE_INCREASE = 2 * NORMAL_INCREASE;
 
     @Test
-    public void qualityIncreasesNormalGivenInitialSellInDaysNotExceeded() {
+    public void qualityIncreasesNormalBeforeSellIn() {
         //given
         int initialSellInDays = 10;
         int initialQuality = 20;
@@ -74,7 +74,7 @@ public class AgedBrieTest extends BaseTest {
     }
 
     @Test
-    public void qualityNeverGoesAboveFifty() {
+    public void verifyQualityNeverAboveMaximum() {
         //given
         int initialSellInDays = 10;
         int initialQuality = 20;
@@ -94,7 +94,7 @@ public class AgedBrieTest extends BaseTest {
     }
 
     @Test
-    public void testSellInDecrease() {
+    public void verifySellInDecreases() {
         //given
         int daysToPass = 60;
         int initialSellIn = 10;

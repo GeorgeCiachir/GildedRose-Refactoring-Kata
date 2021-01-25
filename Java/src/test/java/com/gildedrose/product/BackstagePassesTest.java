@@ -33,7 +33,7 @@ public class BackstagePassesTest extends BaseTest {
     }
 
     @Test
-    public void qualityIncreasesNormalStartingFromZeroBeforeExpiring() {
+    public void qualityIncreasesNormalStartingFromZeroIfNotExpired() {
         //given
         int initialSellInDays = 40;
         int initialQuality = 0;
@@ -43,7 +43,6 @@ public class BackstagePassesTest extends BaseTest {
         //when
         // 29 of increase 1 -> 29
         int daysPassed = 29;
-        assertThat(daysPassed).isLessThanOrEqualTo(initialSellInDays - 10);
         for (int i = 0; i < daysPassed; i++) {
             product.update();
         }
@@ -132,7 +131,7 @@ public class BackstagePassesTest extends BaseTest {
     }
 
     @Test
-    public void qualityNeverGoesAboveFifty() {
+    public void verifyQualityNeverAboveMaximum() {
         //given
         int initialSellInDays = 40;
         int initialQuality = 2;
@@ -162,7 +161,6 @@ public class BackstagePassesTest extends BaseTest {
 
         //when
         int daysPassed = 11;
-        assertThat(daysPassed).isGreaterThan(initialSellInDays - 5);
         for (int i = 0; i < daysPassed; i++) {
             product.update();
         }
@@ -172,7 +170,7 @@ public class BackstagePassesTest extends BaseTest {
     }
 
     @Test
-    public void testSellInDecrease() {
+    public void verifySellInDecreases() {
         //given
         int daysToPass = 60;
         int initialSellIn = 10;
