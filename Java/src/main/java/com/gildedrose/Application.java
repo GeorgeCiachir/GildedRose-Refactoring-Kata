@@ -3,6 +3,7 @@ package com.gildedrose;
 public class Application {
 
     public static void main(String[] args) {
+
         Item[] items = new Item[]{
                 new Item("+5 Dexterity Vest", 10, 20),
                 new Item("Aged Brie", 2, 0),
@@ -18,12 +19,27 @@ public class Application {
 
         GildedRose gildedRose = new GildedRose(items);
 
-        int days = 3;
+        int daysToPass = 2 + 1;//need to add one for the for loop
         if (args.length > 0) {
-            days = Integer.parseInt(args[0]) + 1;
+            if (args.length > 1) {
+                System.out.println("Only the first argument will be used");
+            }
+
+            daysToPass = Integer.parseInt(args[0]) + 1;//need to add one for the for loop
+
+            if (daysToPass <= 0) {
+                throw new IllegalArgumentException("Please provide a non negative number");
+            }
+
+            if (daysToPass > 101) {
+                String message = "50 days or so should be enough to test everything, " +
+                        "but just for the fun of it I decided to allow 100 days as input. " +
+                        "Please don't go overboard.";
+                throw new IllegalArgumentException(message);
+            }
         }
 
-        for (int i = 0; i < days; i++) {
+        for (int i = 0; i < daysToPass; i++) {
             System.out.println("-------- day " + i + " --------");
             System.out.println("name, sellIn, quality");
             for (Item item : items) {
