@@ -1,8 +1,17 @@
 package com.gildedrose;
 
+import java.util.Optional;
+
+import static java.util.Optional.empty;
+import static java.util.Optional.of;
+
 public class Application {
 
+    private static final int DEFAULT_DAYS_TO_PASS = 2;
+
     public static void main(String[] args) {
+        int daysToPass = extractPeriodFromInput(args).orElse(DEFAULT_DAYS_TO_PASS);
+        daysToPass++; //need to add one for the for loop
 
         Item[] items = new Item[]{
                 new Item("+5 Dexterity Vest", 10, 20),
@@ -19,30 +28,6 @@ public class Application {
 
         GildedRose gildedRose = new GildedRose(items);
 
-        int daysToPass = 2 + 1;//need to add one for the for loop
-        if (args.length > 0) {
-
-            if (args.length > 1) {
-                System.out.println("Only the first argument will be used");
-            }
-
-            int intendedDays = Integer.parseInt(args[0]);
-
-            if (intendedDays < 0) {
-                throw new IllegalArgumentException("Please provide a non negative number");
-            }
-
-            if (intendedDays > 100) {
-                String message = "50 days or so should be enough to test everything, " +
-                        "but just for the fun of it I decided to allow 100 days as input. " +
-                        "Please don't go overboard.";
-                throw new IllegalArgumentException(message);
-            }
-
-            daysToPass = intendedDays + 1;//need to add one for the for loop
-
-        }
-
         for (int i = 0; i < daysToPass; i++) {
             System.out.println("-------- day " + i + " --------");
             System.out.println("name, sellIn, quality");
@@ -52,5 +37,36 @@ public class Application {
             System.out.println();
             gildedRose.updateQuality();
         }
+    }
+
+    private static Optional<Integer> extractPeriodFromInput(String[] args) {
+        if (args.length == 0) {
+            return empty();
+        }
+
+        if (args.length > 1) {
+            System.out.println("Only the first provided argument will be used");
+        }
+
+        int period;
+
+        try {
+            period = Integer.parseInt(args[0]);
+        } catch (Exception e) {
+            throw new IllegalArgumentException(e.getMessage());
+        }
+
+        if (period < 0) {
+            throw new IllegalArgumentException("Please provide a non negative number");
+        }
+
+        if (period > 100) {
+            String message = "50 days or so should be enough to test everything, " +
+                    "but just for the fun of it I decided to allow 100 days as input. " +
+                    "Please don't go overboard.";
+            throw new IllegalArgumentException(message);
+        }
+
+        return of(period);
     }
 }
