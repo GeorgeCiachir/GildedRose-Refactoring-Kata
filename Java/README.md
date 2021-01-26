@@ -18,6 +18,8 @@ look at this [DESCRIPTION.md file](DESCRIPTION.md)
 specified number of days (int) to update the products. 
     This value defaults to 2.
     For example: ``java -jar gilded-rose-kata-0.0.1-SNAPSHOT.jar 10``
+* You can provide more than 1 argument as input, but only the first one will be used
+* Conditions for the input/days: it needs to be an integer, not smaller than 0, not greater than 100
 
 #### Testing
 * I have purposely chosen to keep the original repository format, so that text testing can be used, 
