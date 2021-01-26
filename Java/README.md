@@ -16,7 +16,7 @@ look at this [DESCRIPTION.md file](DESCRIPTION.md)
 * After this, cd into the target folder
 * Command ``java -jar gilded-rose-kata-0.0.1-SNAPSHOT.jar {days}`` will now run the produced artefact with a 
 specified number of days (int) to update the products. 
-    This value defaults to 3.
+    This value defaults to 2.
     For example: ``java -jar gilded-rose-kata-0.0.1-SNAPSHOT.jar 10``
 
 #### Testing
