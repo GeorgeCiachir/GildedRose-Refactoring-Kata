@@ -21,22 +21,26 @@ public class Application {
 
         int daysToPass = 2 + 1;//need to add one for the for loop
         if (args.length > 0) {
+
             if (args.length > 1) {
                 System.out.println("Only the first argument will be used");
             }
 
-            daysToPass = Integer.parseInt(args[0]) + 1;//need to add one for the for loop
+            int intendedDays = Integer.parseInt(args[0]);
 
-            if (daysToPass <= 0) {
+            if (intendedDays < 0) {
                 throw new IllegalArgumentException("Please provide a non negative number");
             }
 
-            if (daysToPass > 101) {
+            if (intendedDays > 100) {
                 String message = "50 days or so should be enough to test everything, " +
                         "but just for the fun of it I decided to allow 100 days as input. " +
                         "Please don't go overboard.";
                 throw new IllegalArgumentException(message);
             }
+
+            daysToPass = intendedDays + 1;//need to add one for the for loop
+
         }
 
         for (int i = 0; i < daysToPass; i++) {
